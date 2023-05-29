@@ -13,64 +13,81 @@ import (
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
+	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
-
-	strfmt "github.com/go-openapi/strfmt"
 )
 
-// NewIssueDeleteParams creates a new IssueDeleteParams object
-// with the default values initialized.
+// NewIssueDeleteParams creates a new IssueDeleteParams object,
+// with the default timeout for this client.
+//
+// Default values are not hydrated, since defaults are normally applied by the API server side.
+//
+// To enforce default values in parameter, use SetDefaults or WithDefaults.
 func NewIssueDeleteParams() *IssueDeleteParams {
-	var ()
 	return &IssueDeleteParams{
-
 		timeout: cr.DefaultTimeout,
 	}
 }
 
 // NewIssueDeleteParamsWithTimeout creates a new IssueDeleteParams object
-// with the default values initialized, and the ability to set a timeout on a request
+// with the ability to set a timeout on a request.
 func NewIssueDeleteParamsWithTimeout(timeout time.Duration) *IssueDeleteParams {
-	var ()
 	return &IssueDeleteParams{
-
 		timeout: timeout,
 	}
 }
 
 // NewIssueDeleteParamsWithContext creates a new IssueDeleteParams object
-// with the default values initialized, and the ability to set a context for a request
+// with the ability to set a context for a request.
 func NewIssueDeleteParamsWithContext(ctx context.Context) *IssueDeleteParams {
-	var ()
 	return &IssueDeleteParams{
-
 		Context: ctx,
 	}
 }
 
 // NewIssueDeleteParamsWithHTTPClient creates a new IssueDeleteParams object
-// with the default values initialized, and the ability to set a custom HTTPClient for a request
+// with the ability to set a custom HTTPClient for a request.
 func NewIssueDeleteParamsWithHTTPClient(client *http.Client) *IssueDeleteParams {
-	var ()
 	return &IssueDeleteParams{
 		HTTPClient: client,
 	}
 }
 
-/*IssueDeleteParams contains all the parameters to send to the API endpoint
-for the issue delete operation typically these are written to a http.Request
+/*
+IssueDeleteParams contains all the parameters to send to the API endpoint
+
+	for the issue delete operation.
+
+	Typically these are written to a http.Request.
 */
 type IssueDeleteParams struct {
 
-	/*ID
-	  The issue id.
+	/* ID.
 
+	   The issue id.
+
+	   Format: int64
 	*/
 	ID int64
 
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
+}
+
+// WithDefaults hydrates default values in the issue delete params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *IssueDeleteParams) WithDefaults() *IssueDeleteParams {
+	o.SetDefaults()
+	return o
+}
+
+// SetDefaults hydrates default values in the issue delete params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *IssueDeleteParams) SetDefaults() {
+	// no default values defined for this parameter
 }
 
 // WithTimeout adds the timeout to the issue delete params
@@ -129,6 +146,7 @@ func (o *IssueDeleteParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.R
 	qrID := o.ID
 	qID := swag.FormatInt64(qrID)
 	if qID != "" {
+
 		if err := r.SetQueryParam("id", qID); err != nil {
 			return err
 		}

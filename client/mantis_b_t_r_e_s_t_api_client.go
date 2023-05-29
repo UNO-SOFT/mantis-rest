@@ -8,8 +8,7 @@ package client
 import (
 	"github.com/go-openapi/runtime"
 	httptransport "github.com/go-openapi/runtime/client"
-
-	strfmt "github.com/go-openapi/strfmt"
+	"github.com/go-openapi/strfmt"
 
 	"github.com/UNO-SOFT/mantis-rest/client/config"
 	"github.com/UNO-SOFT/mantis-rest/client/issues"
@@ -17,7 +16,7 @@ import (
 	"github.com/UNO-SOFT/mantis-rest/client/users"
 )
 
-// Default mantis b t r e s t HTTP client.
+// Default mantis b t r e s t API HTTP client.
 var Default = NewHTTPClient(nil)
 
 const (
@@ -32,14 +31,14 @@ const (
 // DefaultSchemes are the default schemes found in Meta (info) section of spec file
 var DefaultSchemes = []string{"http", "https"}
 
-// NewHTTPClient creates a new mantis b t r e s t HTTP client.
-func NewHTTPClient(formats strfmt.Registry) *MantisBTREST {
+// NewHTTPClient creates a new mantis b t r e s t API HTTP client.
+func NewHTTPClient(formats strfmt.Registry) *MantisBTRESTAPI {
 	return NewHTTPClientWithConfig(formats, nil)
 }
 
-// NewHTTPClientWithConfig creates a new mantis b t r e s t HTTP client,
+// NewHTTPClientWithConfig creates a new mantis b t r e s t API HTTP client,
 // using a customizable transport config.
-func NewHTTPClientWithConfig(formats strfmt.Registry, cfg *TransportConfig) *MantisBTREST {
+func NewHTTPClientWithConfig(formats strfmt.Registry, cfg *TransportConfig) *MantisBTRESTAPI {
 	// ensure nullable parameters have default
 	if cfg == nil {
 		cfg = DefaultTransportConfig()
@@ -50,24 +49,19 @@ func NewHTTPClientWithConfig(formats strfmt.Registry, cfg *TransportConfig) *Man
 	return New(transport, formats)
 }
 
-// New creates a new mantis b t r e s t client
-func New(transport runtime.ClientTransport, formats strfmt.Registry) *MantisBTREST {
+// New creates a new mantis b t r e s t API client
+func New(transport runtime.ClientTransport, formats strfmt.Registry) *MantisBTRESTAPI {
 	// ensure nullable parameters have default
 	if formats == nil {
 		formats = strfmt.Default
 	}
 
-	cli := new(MantisBTREST)
+	cli := new(MantisBTRESTAPI)
 	cli.Transport = transport
-
 	cli.Config = config.New(transport, formats)
-
 	cli.Issues = issues.New(transport, formats)
-
 	cli.Localization = localization.New(transport, formats)
-
 	cli.Users = users.New(transport, formats)
-
 	return cli
 }
 
@@ -110,29 +104,24 @@ func (cfg *TransportConfig) WithSchemes(schemes []string) *TransportConfig {
 	return cfg
 }
 
-// MantisBTREST is a client for mantis b t r e s t
-type MantisBTREST struct {
-	Config *config.Client
+// MantisBTRESTAPI is a client for mantis b t r e s t API
+type MantisBTRESTAPI struct {
+	Config config.ClientService
 
-	Issues *issues.Client
+	Issues issues.ClientService
 
-	Localization *localization.Client
+	Localization localization.ClientService
 
-	Users *users.Client
+	Users users.ClientService
 
 	Transport runtime.ClientTransport
 }
 
 // SetTransport changes the transport on the client and all its subresources
-func (c *MantisBTREST) SetTransport(transport runtime.ClientTransport) {
+func (c *MantisBTRESTAPI) SetTransport(transport runtime.ClientTransport) {
 	c.Transport = transport
-
 	c.Config.SetTransport(transport)
-
 	c.Issues.SetTransport(transport)
-
 	c.Localization.SetTransport(transport)
-
 	c.Users.SetTransport(transport)
-
 }

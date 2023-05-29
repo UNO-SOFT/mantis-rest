@@ -9,8 +9,7 @@ import (
 	"fmt"
 
 	"github.com/go-openapi/runtime"
-
-	strfmt "github.com/go-openapi/strfmt"
+	"github.com/go-openapi/strfmt"
 )
 
 // IssueAddReader is a Reader for the IssueAdd structure.
@@ -39,9 +38,8 @@ func (o *IssueAddReader) ReadResponse(response runtime.ClientResponse, consumer 
 			return nil, err
 		}
 		return nil, result
-
 	default:
-		return nil, runtime.NewAPIError("unknown error", response, response.Code())
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -50,14 +48,49 @@ func NewIssueAddCreated() *IssueAddCreated {
 	return &IssueAddCreated{}
 }
 
-/*IssueAddCreated handles this case with default header values.
+/*
+IssueAddCreated describes a response with status code 201, with default header values.
 
 Issue successfully created
 */
 type IssueAddCreated struct {
 }
 
+// IsSuccess returns true when this issue add created response has a 2xx status code
+func (o *IssueAddCreated) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this issue add created response has a 3xx status code
+func (o *IssueAddCreated) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this issue add created response has a 4xx status code
+func (o *IssueAddCreated) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this issue add created response has a 5xx status code
+func (o *IssueAddCreated) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this issue add created response a status code equal to that given
+func (o *IssueAddCreated) IsCode(code int) bool {
+	return code == 201
+}
+
+// Code gets the status code for the issue add created response
+func (o *IssueAddCreated) Code() int {
+	return 201
+}
+
 func (o *IssueAddCreated) Error() string {
+	return fmt.Sprintf("[POST /issues][%d] issueAddCreated ", 201)
+}
+
+func (o *IssueAddCreated) String() string {
 	return fmt.Sprintf("[POST /issues][%d] issueAddCreated ", 201)
 }
 
@@ -71,14 +104,49 @@ func NewIssueAddForbidden() *IssueAddForbidden {
 	return &IssueAddForbidden{}
 }
 
-/*IssueAddForbidden handles this case with default header values.
+/*
+IssueAddForbidden describes a response with status code 403, with default header values.
 
 Access denied
 */
 type IssueAddForbidden struct {
 }
 
+// IsSuccess returns true when this issue add forbidden response has a 2xx status code
+func (o *IssueAddForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this issue add forbidden response has a 3xx status code
+func (o *IssueAddForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this issue add forbidden response has a 4xx status code
+func (o *IssueAddForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this issue add forbidden response has a 5xx status code
+func (o *IssueAddForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this issue add forbidden response a status code equal to that given
+func (o *IssueAddForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
+// Code gets the status code for the issue add forbidden response
+func (o *IssueAddForbidden) Code() int {
+	return 403
+}
+
 func (o *IssueAddForbidden) Error() string {
+	return fmt.Sprintf("[POST /issues][%d] issueAddForbidden ", 403)
+}
+
+func (o *IssueAddForbidden) String() string {
 	return fmt.Sprintf("[POST /issues][%d] issueAddForbidden ", 403)
 }
 
@@ -92,14 +160,49 @@ func NewIssueAddServiceUnavailable() *IssueAddServiceUnavailable {
 	return &IssueAddServiceUnavailable{}
 }
 
-/*IssueAddServiceUnavailable handles this case with default header values.
+/*
+IssueAddServiceUnavailable describes a response with status code 503, with default header values.
 
 Mantis Offline
 */
 type IssueAddServiceUnavailable struct {
 }
 
+// IsSuccess returns true when this issue add service unavailable response has a 2xx status code
+func (o *IssueAddServiceUnavailable) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this issue add service unavailable response has a 3xx status code
+func (o *IssueAddServiceUnavailable) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this issue add service unavailable response has a 4xx status code
+func (o *IssueAddServiceUnavailable) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this issue add service unavailable response has a 5xx status code
+func (o *IssueAddServiceUnavailable) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this issue add service unavailable response a status code equal to that given
+func (o *IssueAddServiceUnavailable) IsCode(code int) bool {
+	return code == 503
+}
+
+// Code gets the status code for the issue add service unavailable response
+func (o *IssueAddServiceUnavailable) Code() int {
+	return 503
+}
+
 func (o *IssueAddServiceUnavailable) Error() string {
+	return fmt.Sprintf("[POST /issues][%d] issueAddServiceUnavailable ", 503)
+}
+
+func (o *IssueAddServiceUnavailable) String() string {
 	return fmt.Sprintf("[POST /issues][%d] issueAddServiceUnavailable ", 503)
 }
 

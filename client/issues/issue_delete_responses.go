@@ -9,8 +9,7 @@ import (
 	"fmt"
 
 	"github.com/go-openapi/runtime"
-
-	strfmt "github.com/go-openapi/strfmt"
+	"github.com/go-openapi/strfmt"
 )
 
 // IssueDeleteReader is a Reader for the IssueDelete structure.
@@ -45,9 +44,8 @@ func (o *IssueDeleteReader) ReadResponse(response runtime.ClientResponse, consum
 			return nil, err
 		}
 		return nil, result
-
 	default:
-		return nil, runtime.NewAPIError("unknown error", response, response.Code())
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -56,14 +54,49 @@ func NewIssueDeleteNoContent() *IssueDeleteNoContent {
 	return &IssueDeleteNoContent{}
 }
 
-/*IssueDeleteNoContent handles this case with default header values.
+/*
+IssueDeleteNoContent describes a response with status code 204, with default header values.
 
 Issue deleted successfully
 */
 type IssueDeleteNoContent struct {
 }
 
+// IsSuccess returns true when this issue delete no content response has a 2xx status code
+func (o *IssueDeleteNoContent) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this issue delete no content response has a 3xx status code
+func (o *IssueDeleteNoContent) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this issue delete no content response has a 4xx status code
+func (o *IssueDeleteNoContent) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this issue delete no content response has a 5xx status code
+func (o *IssueDeleteNoContent) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this issue delete no content response a status code equal to that given
+func (o *IssueDeleteNoContent) IsCode(code int) bool {
+	return code == 204
+}
+
+// Code gets the status code for the issue delete no content response
+func (o *IssueDeleteNoContent) Code() int {
+	return 204
+}
+
 func (o *IssueDeleteNoContent) Error() string {
+	return fmt.Sprintf("[DELETE /issues][%d] issueDeleteNoContent ", 204)
+}
+
+func (o *IssueDeleteNoContent) String() string {
 	return fmt.Sprintf("[DELETE /issues][%d] issueDeleteNoContent ", 204)
 }
 
@@ -77,14 +110,49 @@ func NewIssueDeleteForbidden() *IssueDeleteForbidden {
 	return &IssueDeleteForbidden{}
 }
 
-/*IssueDeleteForbidden handles this case with default header values.
+/*
+IssueDeleteForbidden describes a response with status code 403, with default header values.
 
 Access denied
 */
 type IssueDeleteForbidden struct {
 }
 
+// IsSuccess returns true when this issue delete forbidden response has a 2xx status code
+func (o *IssueDeleteForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this issue delete forbidden response has a 3xx status code
+func (o *IssueDeleteForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this issue delete forbidden response has a 4xx status code
+func (o *IssueDeleteForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this issue delete forbidden response has a 5xx status code
+func (o *IssueDeleteForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this issue delete forbidden response a status code equal to that given
+func (o *IssueDeleteForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
+// Code gets the status code for the issue delete forbidden response
+func (o *IssueDeleteForbidden) Code() int {
+	return 403
+}
+
 func (o *IssueDeleteForbidden) Error() string {
+	return fmt.Sprintf("[DELETE /issues][%d] issueDeleteForbidden ", 403)
+}
+
+func (o *IssueDeleteForbidden) String() string {
 	return fmt.Sprintf("[DELETE /issues][%d] issueDeleteForbidden ", 403)
 }
 
@@ -98,14 +166,49 @@ func NewIssueDeleteNotFound() *IssueDeleteNotFound {
 	return &IssueDeleteNotFound{}
 }
 
-/*IssueDeleteNotFound handles this case with default header values.
+/*
+IssueDeleteNotFound describes a response with status code 404, with default header values.
 
 Issue doesn't exist
 */
 type IssueDeleteNotFound struct {
 }
 
+// IsSuccess returns true when this issue delete not found response has a 2xx status code
+func (o *IssueDeleteNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this issue delete not found response has a 3xx status code
+func (o *IssueDeleteNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this issue delete not found response has a 4xx status code
+func (o *IssueDeleteNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this issue delete not found response has a 5xx status code
+func (o *IssueDeleteNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this issue delete not found response a status code equal to that given
+func (o *IssueDeleteNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the issue delete not found response
+func (o *IssueDeleteNotFound) Code() int {
+	return 404
+}
+
 func (o *IssueDeleteNotFound) Error() string {
+	return fmt.Sprintf("[DELETE /issues][%d] issueDeleteNotFound ", 404)
+}
+
+func (o *IssueDeleteNotFound) String() string {
 	return fmt.Sprintf("[DELETE /issues][%d] issueDeleteNotFound ", 404)
 }
 
@@ -119,14 +222,49 @@ func NewIssueDeleteServiceUnavailable() *IssueDeleteServiceUnavailable {
 	return &IssueDeleteServiceUnavailable{}
 }
 
-/*IssueDeleteServiceUnavailable handles this case with default header values.
+/*
+IssueDeleteServiceUnavailable describes a response with status code 503, with default header values.
 
 Mantis Offline
 */
 type IssueDeleteServiceUnavailable struct {
 }
 
+// IsSuccess returns true when this issue delete service unavailable response has a 2xx status code
+func (o *IssueDeleteServiceUnavailable) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this issue delete service unavailable response has a 3xx status code
+func (o *IssueDeleteServiceUnavailable) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this issue delete service unavailable response has a 4xx status code
+func (o *IssueDeleteServiceUnavailable) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this issue delete service unavailable response has a 5xx status code
+func (o *IssueDeleteServiceUnavailable) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this issue delete service unavailable response a status code equal to that given
+func (o *IssueDeleteServiceUnavailable) IsCode(code int) bool {
+	return code == 503
+}
+
+// Code gets the status code for the issue delete service unavailable response
+func (o *IssueDeleteServiceUnavailable) Code() int {
+	return 503
+}
+
 func (o *IssueDeleteServiceUnavailable) Error() string {
+	return fmt.Sprintf("[DELETE /issues][%d] issueDeleteServiceUnavailable ", 503)
+}
+
+func (o *IssueDeleteServiceUnavailable) String() string {
 	return fmt.Sprintf("[DELETE /issues][%d] issueDeleteServiceUnavailable ", 503)
 }
 

@@ -13,56 +13,71 @@ import (
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
-
-	strfmt "github.com/go-openapi/strfmt"
+	"github.com/go-openapi/strfmt"
 )
 
-// NewUserGetMeParams creates a new UserGetMeParams object
-// with the default values initialized.
+// NewUserGetMeParams creates a new UserGetMeParams object,
+// with the default timeout for this client.
+//
+// Default values are not hydrated, since defaults are normally applied by the API server side.
+//
+// To enforce default values in parameter, use SetDefaults or WithDefaults.
 func NewUserGetMeParams() *UserGetMeParams {
-
 	return &UserGetMeParams{
-
 		timeout: cr.DefaultTimeout,
 	}
 }
 
 // NewUserGetMeParamsWithTimeout creates a new UserGetMeParams object
-// with the default values initialized, and the ability to set a timeout on a request
+// with the ability to set a timeout on a request.
 func NewUserGetMeParamsWithTimeout(timeout time.Duration) *UserGetMeParams {
-
 	return &UserGetMeParams{
-
 		timeout: timeout,
 	}
 }
 
 // NewUserGetMeParamsWithContext creates a new UserGetMeParams object
-// with the default values initialized, and the ability to set a context for a request
+// with the ability to set a context for a request.
 func NewUserGetMeParamsWithContext(ctx context.Context) *UserGetMeParams {
-
 	return &UserGetMeParams{
-
 		Context: ctx,
 	}
 }
 
 // NewUserGetMeParamsWithHTTPClient creates a new UserGetMeParams object
-// with the default values initialized, and the ability to set a custom HTTPClient for a request
+// with the ability to set a custom HTTPClient for a request.
 func NewUserGetMeParamsWithHTTPClient(client *http.Client) *UserGetMeParams {
-
 	return &UserGetMeParams{
 		HTTPClient: client,
 	}
 }
 
-/*UserGetMeParams contains all the parameters to send to the API endpoint
-for the user get me operation typically these are written to a http.Request
+/*
+UserGetMeParams contains all the parameters to send to the API endpoint
+
+	for the user get me operation.
+
+	Typically these are written to a http.Request.
 */
 type UserGetMeParams struct {
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
+}
+
+// WithDefaults hydrates default values in the user get me params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *UserGetMeParams) WithDefaults() *UserGetMeParams {
+	o.SetDefaults()
+	return o
+}
+
+// SetDefaults hydrates default values in the user get me params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *UserGetMeParams) SetDefaults() {
+	// no default values defined for this parameter
 }
 
 // WithTimeout adds the timeout to the user get me params

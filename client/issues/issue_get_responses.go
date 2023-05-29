@@ -10,10 +10,9 @@ import (
 	"io"
 
 	"github.com/go-openapi/runtime"
+	"github.com/go-openapi/strfmt"
 
-	strfmt "github.com/go-openapi/strfmt"
-
-	models "github.com/UNO-SOFT/mantis-rest/models"
+	"github.com/UNO-SOFT/mantis-rest/models"
 )
 
 // IssueGetReader is a Reader for the IssueGet structure.
@@ -42,9 +41,8 @@ func (o *IssueGetReader) ReadResponse(response runtime.ClientResponse, consumer 
 			return nil, err
 		}
 		return nil, result
-
 	default:
-		return nil, runtime.NewAPIError("unknown error", response, response.Code())
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -53,7 +51,8 @@ func NewIssueGetOK() *IssueGetOK {
 	return &IssueGetOK{}
 }
 
-/*IssueGetOK handles this case with default header values.
+/*
+IssueGetOK describes a response with status code 200, with default header values.
 
 Success with issue details
 */
@@ -61,7 +60,41 @@ type IssueGetOK struct {
 	Payload *models.CreateIssueResponse
 }
 
+// IsSuccess returns true when this issue get o k response has a 2xx status code
+func (o *IssueGetOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this issue get o k response has a 3xx status code
+func (o *IssueGetOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this issue get o k response has a 4xx status code
+func (o *IssueGetOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this issue get o k response has a 5xx status code
+func (o *IssueGetOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this issue get o k response a status code equal to that given
+func (o *IssueGetOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the issue get o k response
+func (o *IssueGetOK) Code() int {
+	return 200
+}
+
 func (o *IssueGetOK) Error() string {
+	return fmt.Sprintf("[GET /issues][%d] issueGetOK  %+v", 200, o.Payload)
+}
+
+func (o *IssueGetOK) String() string {
 	return fmt.Sprintf("[GET /issues][%d] issueGetOK  %+v", 200, o.Payload)
 }
 
@@ -86,14 +119,49 @@ func NewIssueGetForbidden() *IssueGetForbidden {
 	return &IssueGetForbidden{}
 }
 
-/*IssueGetForbidden handles this case with default header values.
+/*
+IssueGetForbidden describes a response with status code 403, with default header values.
 
 Access denied
 */
 type IssueGetForbidden struct {
 }
 
+// IsSuccess returns true when this issue get forbidden response has a 2xx status code
+func (o *IssueGetForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this issue get forbidden response has a 3xx status code
+func (o *IssueGetForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this issue get forbidden response has a 4xx status code
+func (o *IssueGetForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this issue get forbidden response has a 5xx status code
+func (o *IssueGetForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this issue get forbidden response a status code equal to that given
+func (o *IssueGetForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
+// Code gets the status code for the issue get forbidden response
+func (o *IssueGetForbidden) Code() int {
+	return 403
+}
+
 func (o *IssueGetForbidden) Error() string {
+	return fmt.Sprintf("[GET /issues][%d] issueGetForbidden ", 403)
+}
+
+func (o *IssueGetForbidden) String() string {
 	return fmt.Sprintf("[GET /issues][%d] issueGetForbidden ", 403)
 }
 
@@ -107,14 +175,49 @@ func NewIssueGetServiceUnavailable() *IssueGetServiceUnavailable {
 	return &IssueGetServiceUnavailable{}
 }
 
-/*IssueGetServiceUnavailable handles this case with default header values.
+/*
+IssueGetServiceUnavailable describes a response with status code 503, with default header values.
 
 Mantis Offline
 */
 type IssueGetServiceUnavailable struct {
 }
 
+// IsSuccess returns true when this issue get service unavailable response has a 2xx status code
+func (o *IssueGetServiceUnavailable) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this issue get service unavailable response has a 3xx status code
+func (o *IssueGetServiceUnavailable) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this issue get service unavailable response has a 4xx status code
+func (o *IssueGetServiceUnavailable) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this issue get service unavailable response has a 5xx status code
+func (o *IssueGetServiceUnavailable) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this issue get service unavailable response a status code equal to that given
+func (o *IssueGetServiceUnavailable) IsCode(code int) bool {
+	return code == 503
+}
+
+// Code gets the status code for the issue get service unavailable response
+func (o *IssueGetServiceUnavailable) Code() int {
+	return 503
+}
+
 func (o *IssueGetServiceUnavailable) Error() string {
+	return fmt.Sprintf("[GET /issues][%d] issueGetServiceUnavailable ", 503)
+}
+
+func (o *IssueGetServiceUnavailable) String() string {
 	return fmt.Sprintf("[GET /issues][%d] issueGetServiceUnavailable ", 503)
 }
 

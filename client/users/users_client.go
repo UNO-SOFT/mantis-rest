@@ -9,12 +9,11 @@ import (
 	"fmt"
 
 	"github.com/go-openapi/runtime"
-
-	strfmt "github.com/go-openapi/strfmt"
+	"github.com/go-openapi/strfmt"
 )
 
 // New creates a new users API client.
-func New(transport runtime.ClientTransport, formats strfmt.Registry) *Client {
+func New(transport runtime.ClientTransport, formats strfmt.Registry) ClientService {
 	return &Client{transport: transport, formats: formats}
 }
 
@@ -26,30 +25,46 @@ type Client struct {
 	formats   strfmt.Registry
 }
 
+// ClientOption is the option for Client methods
+type ClientOption func(*runtime.ClientOperation)
+
+// ClientService is the interface for Client methods
+type ClientService interface {
+	UserGetMe(params *UserGetMeParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UserGetMeOK, error)
+
+	UserResetPassword(params *UserResetPasswordParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UserResetPasswordOK, error)
+
+	SetTransport(transport runtime.ClientTransport)
+}
+
 /*
 UserGetMe gets information about logged in user
 
 Gets information about logged in user.
 */
-func (a *Client) UserGetMe(params *UserGetMeParams, authInfo runtime.ClientAuthInfoWriter) (*UserGetMeOK, error) {
+func (a *Client) UserGetMe(params *UserGetMeParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UserGetMeOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewUserGetMeParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "userGetMe",
 		Method:             "GET",
 		PathPattern:        "/users/me",
 		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{""},
+		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},
 		Params:             params,
 		Reader:             &UserGetMeReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
@@ -68,25 +83,29 @@ UserResetPassword resets user s password
 
 Reset the user's password
 */
-func (a *Client) UserResetPassword(params *UserResetPasswordParams, authInfo runtime.ClientAuthInfoWriter) (*UserResetPasswordOK, error) {
+func (a *Client) UserResetPassword(params *UserResetPasswordParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UserResetPasswordOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewUserResetPasswordParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "userResetPassword",
 		Method:             "PUT",
 		PathPattern:        "/users/reset",
 		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{""},
+		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},
 		Params:             params,
 		Reader:             &UserResetPasswordReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}

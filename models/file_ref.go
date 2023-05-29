@@ -12,30 +12,31 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// LocalizedString localized string
+// FileRef file ref
 //
-// swagger:model LocalizedString
-type LocalizedString struct {
+// swagger:model FileRef
+type FileRef struct {
 
-	// localized
-	Localized string `json:"localized,omitempty"`
+	// content
+	// Format: byte
+	Content strfmt.Base64 `json:"content,omitempty"`
 
 	// name
 	Name string `json:"name,omitempty"`
 }
 
-// Validate validates this localized string
-func (m *LocalizedString) Validate(formats strfmt.Registry) error {
+// Validate validates this file ref
+func (m *FileRef) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
-// ContextValidate validates this localized string based on context it is used
-func (m *LocalizedString) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+// ContextValidate validates this file ref based on context it is used
+func (m *FileRef) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
 // MarshalBinary interface implementation
-func (m *LocalizedString) MarshalBinary() ([]byte, error) {
+func (m *FileRef) MarshalBinary() ([]byte, error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -43,8 +44,8 @@ func (m *LocalizedString) MarshalBinary() ([]byte, error) {
 }
 
 // UnmarshalBinary interface implementation
-func (m *LocalizedString) UnmarshalBinary(b []byte) error {
-	var res LocalizedString
+func (m *FileRef) UnmarshalBinary(b []byte) error {
+	var res FileRef
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}

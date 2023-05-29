@@ -6,15 +6,16 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
 	"strconv"
 
-	strfmt "github.com/go-openapi/strfmt"
-
 	"github.com/go-openapi/errors"
+	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 )
 
 // UserMeResponse user me response
+//
 // swagger:model UserMeResponse
 type UserMeResponse struct {
 
@@ -59,7 +60,6 @@ func (m *UserMeResponse) Validate(formats strfmt.Registry) error {
 }
 
 func (m *UserMeResponse) validateAccessLevel(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.AccessLevel) { // not required
 		return nil
 	}
@@ -68,6 +68,8 @@ func (m *UserMeResponse) validateAccessLevel(formats strfmt.Registry) error {
 		if err := m.AccessLevel.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("access_level")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("access_level")
 			}
 			return err
 		}
@@ -77,7 +79,6 @@ func (m *UserMeResponse) validateAccessLevel(formats strfmt.Registry) error {
 }
 
 func (m *UserMeResponse) validateProjects(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.Projects) { // not required
 		return nil
 	}
@@ -91,6 +92,62 @@ func (m *UserMeResponse) validateProjects(formats strfmt.Registry) error {
 			if err := m.Projects[i].Validate(formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("projects" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("projects" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+// ContextValidate validate this user me response based on the context it is used
+func (m *UserMeResponse) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateAccessLevel(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateProjects(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *UserMeResponse) contextValidateAccessLevel(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.AccessLevel != nil {
+		if err := m.AccessLevel.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("access_level")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("access_level")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *UserMeResponse) contextValidateProjects(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(m.Projects); i++ {
+
+		if m.Projects[i] != nil {
+			if err := m.Projects[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("projects" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("projects" + "." + strconv.Itoa(i))
 				}
 				return err
 			}

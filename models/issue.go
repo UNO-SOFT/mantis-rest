@@ -6,14 +6,16 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	strfmt "github.com/go-openapi/strfmt"
+	"context"
 
 	"github.com/go-openapi/errors"
+	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
 )
 
 // Issue issue
+//
 // swagger:model Issue
 type Issue struct {
 
@@ -71,7 +73,6 @@ func (m *Issue) validateDescription(formats strfmt.Registry) error {
 }
 
 func (m *Issue) validateHandler(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.Handler) { // not required
 		return nil
 	}
@@ -80,6 +81,8 @@ func (m *Issue) validateHandler(formats strfmt.Registry) error {
 		if err := m.Handler.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("handler")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("handler")
 			}
 			return err
 		}
@@ -89,7 +92,6 @@ func (m *Issue) validateHandler(formats strfmt.Registry) error {
 }
 
 func (m *Issue) validateReporter(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.Reporter) { // not required
 		return nil
 	}
@@ -98,6 +100,8 @@ func (m *Issue) validateReporter(formats strfmt.Registry) error {
 		if err := m.Reporter.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("reporter")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("reporter")
 			}
 			return err
 		}
@@ -110,6 +114,56 @@ func (m *Issue) validateSummary(formats strfmt.Registry) error {
 
 	if err := validate.Required("summary", "body", m.Summary); err != nil {
 		return err
+	}
+
+	return nil
+}
+
+// ContextValidate validate this issue based on the context it is used
+func (m *Issue) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateHandler(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateReporter(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *Issue) contextValidateHandler(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Handler != nil {
+		if err := m.Handler.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("handler")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("handler")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *Issue) contextValidateReporter(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Reporter != nil {
+		if err := m.Reporter.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("reporter")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("reporter")
+			}
+			return err
+		}
 	}
 
 	return nil

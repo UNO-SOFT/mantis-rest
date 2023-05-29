@@ -6,12 +6,14 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	strfmt "github.com/go-openapi/strfmt"
+	"context"
 
+	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 )
 
 // EnumRef enum ref
+//
 // swagger:model EnumRef
 type EnumRef struct {
 
@@ -24,6 +26,11 @@ type EnumRef struct {
 
 // Validate validates this enum ref
 func (m *EnumRef) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this enum ref based on context it is used
+func (m *EnumRef) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 

@@ -10,10 +10,9 @@ import (
 	"io"
 
 	"github.com/go-openapi/runtime"
+	"github.com/go-openapi/strfmt"
 
-	strfmt "github.com/go-openapi/strfmt"
-
-	models "github.com/UNO-SOFT/mantis-rest/models"
+	"github.com/UNO-SOFT/mantis-rest/models"
 )
 
 // LangGetReader is a Reader for the LangGet structure.
@@ -42,9 +41,8 @@ func (o *LangGetReader) ReadResponse(response runtime.ClientResponse, consumer r
 			return nil, err
 		}
 		return nil, result
-
 	default:
-		return nil, runtime.NewAPIError("unknown error", response, response.Code())
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -53,7 +51,8 @@ func NewLangGetOK() *LangGetOK {
 	return &LangGetOK{}
 }
 
-/*LangGetOK handles this case with default header values.
+/*
+LangGetOK describes a response with status code 200, with default header values.
 
 Success
 */
@@ -61,7 +60,41 @@ type LangGetOK struct {
 	Payload *models.LangGetResponse
 }
 
+// IsSuccess returns true when this lang get o k response has a 2xx status code
+func (o *LangGetOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this lang get o k response has a 3xx status code
+func (o *LangGetOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this lang get o k response has a 4xx status code
+func (o *LangGetOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this lang get o k response has a 5xx status code
+func (o *LangGetOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this lang get o k response a status code equal to that given
+func (o *LangGetOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the lang get o k response
+func (o *LangGetOK) Code() int {
+	return 200
+}
+
 func (o *LangGetOK) Error() string {
+	return fmt.Sprintf("[GET /lang][%d] langGetOK  %+v", 200, o.Payload)
+}
+
+func (o *LangGetOK) String() string {
 	return fmt.Sprintf("[GET /lang][%d] langGetOK  %+v", 200, o.Payload)
 }
 
@@ -86,14 +119,49 @@ func NewLangGetForbidden() *LangGetForbidden {
 	return &LangGetForbidden{}
 }
 
-/*LangGetForbidden handles this case with default header values.
+/*
+LangGetForbidden describes a response with status code 403, with default header values.
 
 Access denied
 */
 type LangGetForbidden struct {
 }
 
+// IsSuccess returns true when this lang get forbidden response has a 2xx status code
+func (o *LangGetForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this lang get forbidden response has a 3xx status code
+func (o *LangGetForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this lang get forbidden response has a 4xx status code
+func (o *LangGetForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this lang get forbidden response has a 5xx status code
+func (o *LangGetForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this lang get forbidden response a status code equal to that given
+func (o *LangGetForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
+// Code gets the status code for the lang get forbidden response
+func (o *LangGetForbidden) Code() int {
+	return 403
+}
+
 func (o *LangGetForbidden) Error() string {
+	return fmt.Sprintf("[GET /lang][%d] langGetForbidden ", 403)
+}
+
+func (o *LangGetForbidden) String() string {
 	return fmt.Sprintf("[GET /lang][%d] langGetForbidden ", 403)
 }
 
@@ -107,14 +175,49 @@ func NewLangGetServiceUnavailable() *LangGetServiceUnavailable {
 	return &LangGetServiceUnavailable{}
 }
 
-/*LangGetServiceUnavailable handles this case with default header values.
+/*
+LangGetServiceUnavailable describes a response with status code 503, with default header values.
 
 Mantis Offline
 */
 type LangGetServiceUnavailable struct {
 }
 
+// IsSuccess returns true when this lang get service unavailable response has a 2xx status code
+func (o *LangGetServiceUnavailable) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this lang get service unavailable response has a 3xx status code
+func (o *LangGetServiceUnavailable) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this lang get service unavailable response has a 4xx status code
+func (o *LangGetServiceUnavailable) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this lang get service unavailable response has a 5xx status code
+func (o *LangGetServiceUnavailable) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this lang get service unavailable response a status code equal to that given
+func (o *LangGetServiceUnavailable) IsCode(code int) bool {
+	return code == 503
+}
+
+// Code gets the status code for the lang get service unavailable response
+func (o *LangGetServiceUnavailable) Code() int {
+	return 503
+}
+
 func (o *LangGetServiceUnavailable) Error() string {
+	return fmt.Sprintf("[GET /lang][%d] langGetServiceUnavailable ", 503)
+}
+
+func (o *LangGetServiceUnavailable) String() string {
 	return fmt.Sprintf("[GET /lang][%d] langGetServiceUnavailable ", 503)
 }
 

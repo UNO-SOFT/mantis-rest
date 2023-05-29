@@ -9,8 +9,7 @@ import (
 	"fmt"
 
 	"github.com/go-openapi/runtime"
-
-	strfmt "github.com/go-openapi/strfmt"
+	"github.com/go-openapi/strfmt"
 )
 
 // UserResetPasswordReader is a Reader for the UserResetPassword structure.
@@ -39,9 +38,8 @@ func (o *UserResetPasswordReader) ReadResponse(response runtime.ClientResponse, 
 			return nil, err
 		}
 		return nil, result
-
 	default:
-		return nil, runtime.NewAPIError("unknown error", response, response.Code())
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -50,14 +48,49 @@ func NewUserResetPasswordOK() *UserResetPasswordOK {
 	return &UserResetPasswordOK{}
 }
 
-/*UserResetPasswordOK handles this case with default header values.
+/*
+UserResetPasswordOK describes a response with status code 200, with default header values.
 
 Success
 */
 type UserResetPasswordOK struct {
 }
 
+// IsSuccess returns true when this user reset password o k response has a 2xx status code
+func (o *UserResetPasswordOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this user reset password o k response has a 3xx status code
+func (o *UserResetPasswordOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this user reset password o k response has a 4xx status code
+func (o *UserResetPasswordOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this user reset password o k response has a 5xx status code
+func (o *UserResetPasswordOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this user reset password o k response a status code equal to that given
+func (o *UserResetPasswordOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the user reset password o k response
+func (o *UserResetPasswordOK) Code() int {
+	return 200
+}
+
 func (o *UserResetPasswordOK) Error() string {
+	return fmt.Sprintf("[PUT /users/reset][%d] userResetPasswordOK ", 200)
+}
+
+func (o *UserResetPasswordOK) String() string {
 	return fmt.Sprintf("[PUT /users/reset][%d] userResetPasswordOK ", 200)
 }
 
@@ -71,14 +104,49 @@ func NewUserResetPasswordForbidden() *UserResetPasswordForbidden {
 	return &UserResetPasswordForbidden{}
 }
 
-/*UserResetPasswordForbidden handles this case with default header values.
+/*
+UserResetPasswordForbidden describes a response with status code 403, with default header values.
 
 Access denied
 */
 type UserResetPasswordForbidden struct {
 }
 
+// IsSuccess returns true when this user reset password forbidden response has a 2xx status code
+func (o *UserResetPasswordForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this user reset password forbidden response has a 3xx status code
+func (o *UserResetPasswordForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this user reset password forbidden response has a 4xx status code
+func (o *UserResetPasswordForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this user reset password forbidden response has a 5xx status code
+func (o *UserResetPasswordForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this user reset password forbidden response a status code equal to that given
+func (o *UserResetPasswordForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
+// Code gets the status code for the user reset password forbidden response
+func (o *UserResetPasswordForbidden) Code() int {
+	return 403
+}
+
 func (o *UserResetPasswordForbidden) Error() string {
+	return fmt.Sprintf("[PUT /users/reset][%d] userResetPasswordForbidden ", 403)
+}
+
+func (o *UserResetPasswordForbidden) String() string {
 	return fmt.Sprintf("[PUT /users/reset][%d] userResetPasswordForbidden ", 403)
 }
 
@@ -92,14 +160,49 @@ func NewUserResetPasswordServiceUnavailable() *UserResetPasswordServiceUnavailab
 	return &UserResetPasswordServiceUnavailable{}
 }
 
-/*UserResetPasswordServiceUnavailable handles this case with default header values.
+/*
+UserResetPasswordServiceUnavailable describes a response with status code 503, with default header values.
 
 Mantis Offline
 */
 type UserResetPasswordServiceUnavailable struct {
 }
 
+// IsSuccess returns true when this user reset password service unavailable response has a 2xx status code
+func (o *UserResetPasswordServiceUnavailable) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this user reset password service unavailable response has a 3xx status code
+func (o *UserResetPasswordServiceUnavailable) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this user reset password service unavailable response has a 4xx status code
+func (o *UserResetPasswordServiceUnavailable) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this user reset password service unavailable response has a 5xx status code
+func (o *UserResetPasswordServiceUnavailable) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this user reset password service unavailable response a status code equal to that given
+func (o *UserResetPasswordServiceUnavailable) IsCode(code int) bool {
+	return code == 503
+}
+
+// Code gets the status code for the user reset password service unavailable response
+func (o *UserResetPasswordServiceUnavailable) Code() int {
+	return 503
+}
+
 func (o *UserResetPasswordServiceUnavailable) Error() string {
+	return fmt.Sprintf("[PUT /users/reset][%d] userResetPasswordServiceUnavailable ", 503)
+}
+
+func (o *UserResetPasswordServiceUnavailable) String() string {
 	return fmt.Sprintf("[PUT /users/reset][%d] userResetPasswordServiceUnavailable ", 503)
 }
 

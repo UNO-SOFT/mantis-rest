@@ -6,12 +6,14 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	strfmt "github.com/go-openapi/strfmt"
+	"context"
 
+	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 )
 
 // AccountRef account ref
+//
 // swagger:model AccountRef
 type AccountRef struct {
 
@@ -30,6 +32,11 @@ type AccountRef struct {
 
 // Validate validates this account ref
 func (m *AccountRef) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this account ref based on context it is used
+func (m *AccountRef) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 

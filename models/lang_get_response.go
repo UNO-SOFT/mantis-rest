@@ -6,15 +6,16 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
 	"strconv"
 
-	strfmt "github.com/go-openapi/strfmt"
-
 	"github.com/go-openapi/errors"
+	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 )
 
 // LangGetResponse lang get response
+//
 // swagger:model LangGetResponse
 type LangGetResponse struct {
 
@@ -40,7 +41,6 @@ func (m *LangGetResponse) Validate(formats strfmt.Registry) error {
 }
 
 func (m *LangGetResponse) validateStrings(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.Strings) { // not required
 		return nil
 	}
@@ -54,6 +54,42 @@ func (m *LangGetResponse) validateStrings(formats strfmt.Registry) error {
 			if err := m.Strings[i].Validate(formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("strings" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("strings" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+// ContextValidate validate this lang get response based on the context it is used
+func (m *LangGetResponse) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateStrings(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *LangGetResponse) contextValidateStrings(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(m.Strings); i++ {
+
+		if m.Strings[i] != nil {
+			if err := m.Strings[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("strings" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("strings" + "." + strconv.Itoa(i))
 				}
 				return err
 			}

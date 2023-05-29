@@ -12,36 +12,33 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// ProjectRef project ref
+// ViewStateRef view state ref
 //
-// swagger:model ProjectRef
-type ProjectRef struct {
-
-	// description
-	Description string `json:"description,omitempty"`
-
-	// enabled
-	Enabled bool `json:"enabled,omitempty"`
+// swagger:model ViewStateRef
+type ViewStateRef struct {
 
 	// id
 	ID int64 `json:"id,omitempty"`
+
+	// label
+	Label string `json:"label,omitempty"`
 
 	// name
 	Name string `json:"name,omitempty"`
 }
 
-// Validate validates this project ref
-func (m *ProjectRef) Validate(formats strfmt.Registry) error {
+// Validate validates this view state ref
+func (m *ViewStateRef) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
-// ContextValidate validates this project ref based on context it is used
-func (m *ProjectRef) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+// ContextValidate validates this view state ref based on context it is used
+func (m *ViewStateRef) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 
 // MarshalBinary interface implementation
-func (m *ProjectRef) MarshalBinary() ([]byte, error) {
+func (m *ViewStateRef) MarshalBinary() ([]byte, error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -49,8 +46,8 @@ func (m *ProjectRef) MarshalBinary() ([]byte, error) {
 }
 
 // UnmarshalBinary interface implementation
-func (m *ProjectRef) UnmarshalBinary(b []byte) error {
-	var res ProjectRef
+func (m *ViewStateRef) UnmarshalBinary(b []byte) error {
+	var res ViewStateRef
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}

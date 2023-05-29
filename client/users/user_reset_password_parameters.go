@@ -13,56 +13,71 @@ import (
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
-
-	strfmt "github.com/go-openapi/strfmt"
+	"github.com/go-openapi/strfmt"
 )
 
-// NewUserResetPasswordParams creates a new UserResetPasswordParams object
-// with the default values initialized.
+// NewUserResetPasswordParams creates a new UserResetPasswordParams object,
+// with the default timeout for this client.
+//
+// Default values are not hydrated, since defaults are normally applied by the API server side.
+//
+// To enforce default values in parameter, use SetDefaults or WithDefaults.
 func NewUserResetPasswordParams() *UserResetPasswordParams {
-
 	return &UserResetPasswordParams{
-
 		timeout: cr.DefaultTimeout,
 	}
 }
 
 // NewUserResetPasswordParamsWithTimeout creates a new UserResetPasswordParams object
-// with the default values initialized, and the ability to set a timeout on a request
+// with the ability to set a timeout on a request.
 func NewUserResetPasswordParamsWithTimeout(timeout time.Duration) *UserResetPasswordParams {
-
 	return &UserResetPasswordParams{
-
 		timeout: timeout,
 	}
 }
 
 // NewUserResetPasswordParamsWithContext creates a new UserResetPasswordParams object
-// with the default values initialized, and the ability to set a context for a request
+// with the ability to set a context for a request.
 func NewUserResetPasswordParamsWithContext(ctx context.Context) *UserResetPasswordParams {
-
 	return &UserResetPasswordParams{
-
 		Context: ctx,
 	}
 }
 
 // NewUserResetPasswordParamsWithHTTPClient creates a new UserResetPasswordParams object
-// with the default values initialized, and the ability to set a custom HTTPClient for a request
+// with the ability to set a custom HTTPClient for a request.
 func NewUserResetPasswordParamsWithHTTPClient(client *http.Client) *UserResetPasswordParams {
-
 	return &UserResetPasswordParams{
 		HTTPClient: client,
 	}
 }
 
-/*UserResetPasswordParams contains all the parameters to send to the API endpoint
-for the user reset password operation typically these are written to a http.Request
+/*
+UserResetPasswordParams contains all the parameters to send to the API endpoint
+
+	for the user reset password operation.
+
+	Typically these are written to a http.Request.
 */
 type UserResetPasswordParams struct {
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
+}
+
+// WithDefaults hydrates default values in the user reset password params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *UserResetPasswordParams) WithDefaults() *UserResetPasswordParams {
+	o.SetDefaults()
+	return o
+}
+
+// SetDefaults hydrates default values in the user reset password params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *UserResetPasswordParams) SetDefaults() {
+	// no default values defined for this parameter
 }
 
 // WithTimeout adds the timeout to the user reset password params

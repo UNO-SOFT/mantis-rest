@@ -47,6 +47,6 @@ func Main() error {
 	if err != nil {
 		return err
 	}
-	log.Printf("%s", resp.Payload)
+	log.Println(resp.Payload)
 	return nil
 }

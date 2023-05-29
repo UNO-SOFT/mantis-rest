@@ -10,10 +10,9 @@ import (
 	"io"
 
 	"github.com/go-openapi/runtime"
+	"github.com/go-openapi/strfmt"
 
-	strfmt "github.com/go-openapi/strfmt"
-
-	models "github.com/UNO-SOFT/mantis-rest/models"
+	"github.com/UNO-SOFT/mantis-rest/models"
 )
 
 // ConfigGetReader is a Reader for the ConfigGet structure.
@@ -48,9 +47,8 @@ func (o *ConfigGetReader) ReadResponse(response runtime.ClientResponse, consumer
 			return nil, err
 		}
 		return nil, result
-
 	default:
-		return nil, runtime.NewAPIError("unknown error", response, response.Code())
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -59,7 +57,8 @@ func NewConfigGetOK() *ConfigGetOK {
 	return &ConfigGetOK{}
 }
 
-/*ConfigGetOK handles this case with default header values.
+/*
+ConfigGetOK describes a response with status code 200, with default header values.
 
 Success
 */
@@ -67,7 +66,41 @@ type ConfigGetOK struct {
 	Payload *models.ConfigGetResponse
 }
 
+// IsSuccess returns true when this config get o k response has a 2xx status code
+func (o *ConfigGetOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this config get o k response has a 3xx status code
+func (o *ConfigGetOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this config get o k response has a 4xx status code
+func (o *ConfigGetOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this config get o k response has a 5xx status code
+func (o *ConfigGetOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this config get o k response a status code equal to that given
+func (o *ConfigGetOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the config get o k response
+func (o *ConfigGetOK) Code() int {
+	return 200
+}
+
 func (o *ConfigGetOK) Error() string {
+	return fmt.Sprintf("[GET /config][%d] configGetOK  %+v", 200, o.Payload)
+}
+
+func (o *ConfigGetOK) String() string {
 	return fmt.Sprintf("[GET /config][%d] configGetOK  %+v", 200, o.Payload)
 }
 
@@ -92,14 +125,49 @@ func NewConfigGetForbidden() *ConfigGetForbidden {
 	return &ConfigGetForbidden{}
 }
 
-/*ConfigGetForbidden handles this case with default header values.
+/*
+ConfigGetForbidden describes a response with status code 403, with default header values.
 
 Access denied
 */
 type ConfigGetForbidden struct {
 }
 
+// IsSuccess returns true when this config get forbidden response has a 2xx status code
+func (o *ConfigGetForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this config get forbidden response has a 3xx status code
+func (o *ConfigGetForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this config get forbidden response has a 4xx status code
+func (o *ConfigGetForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this config get forbidden response has a 5xx status code
+func (o *ConfigGetForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this config get forbidden response a status code equal to that given
+func (o *ConfigGetForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
+// Code gets the status code for the config get forbidden response
+func (o *ConfigGetForbidden) Code() int {
+	return 403
+}
+
 func (o *ConfigGetForbidden) Error() string {
+	return fmt.Sprintf("[GET /config][%d] configGetForbidden ", 403)
+}
+
+func (o *ConfigGetForbidden) String() string {
 	return fmt.Sprintf("[GET /config][%d] configGetForbidden ", 403)
 }
 
@@ -113,14 +181,49 @@ func NewConfigGetNotFound() *ConfigGetNotFound {
 	return &ConfigGetNotFound{}
 }
 
-/*ConfigGetNotFound handles this case with default header values.
+/*
+ConfigGetNotFound describes a response with status code 404, with default header values.
 
 User or Project not found
 */
 type ConfigGetNotFound struct {
 }
 
+// IsSuccess returns true when this config get not found response has a 2xx status code
+func (o *ConfigGetNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this config get not found response has a 3xx status code
+func (o *ConfigGetNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this config get not found response has a 4xx status code
+func (o *ConfigGetNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this config get not found response has a 5xx status code
+func (o *ConfigGetNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this config get not found response a status code equal to that given
+func (o *ConfigGetNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the config get not found response
+func (o *ConfigGetNotFound) Code() int {
+	return 404
+}
+
 func (o *ConfigGetNotFound) Error() string {
+	return fmt.Sprintf("[GET /config][%d] configGetNotFound ", 404)
+}
+
+func (o *ConfigGetNotFound) String() string {
 	return fmt.Sprintf("[GET /config][%d] configGetNotFound ", 404)
 }
 
@@ -134,14 +237,49 @@ func NewConfigGetServiceUnavailable() *ConfigGetServiceUnavailable {
 	return &ConfigGetServiceUnavailable{}
 }
 
-/*ConfigGetServiceUnavailable handles this case with default header values.
+/*
+ConfigGetServiceUnavailable describes a response with status code 503, with default header values.
 
 Mantis Offline
 */
 type ConfigGetServiceUnavailable struct {
 }
 
+// IsSuccess returns true when this config get service unavailable response has a 2xx status code
+func (o *ConfigGetServiceUnavailable) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this config get service unavailable response has a 3xx status code
+func (o *ConfigGetServiceUnavailable) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this config get service unavailable response has a 4xx status code
+func (o *ConfigGetServiceUnavailable) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this config get service unavailable response has a 5xx status code
+func (o *ConfigGetServiceUnavailable) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this config get service unavailable response a status code equal to that given
+func (o *ConfigGetServiceUnavailable) IsCode(code int) bool {
+	return code == 503
+}
+
+// Code gets the status code for the config get service unavailable response
+func (o *ConfigGetServiceUnavailable) Code() int {
+	return 503
+}
+
 func (o *ConfigGetServiceUnavailable) Error() string {
+	return fmt.Sprintf("[GET /config][%d] configGetServiceUnavailable ", 503)
+}
+
+func (o *ConfigGetServiceUnavailable) String() string {
 	return fmt.Sprintf("[GET /config][%d] configGetServiceUnavailable ", 503)
 }
 
