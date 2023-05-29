@@ -63,6 +63,43 @@ func (a *Client) UserGetMe(params *UserGetMeParams, authInfo runtime.ClientAuthI
 	panic(msg)
 }
 
+/*
+UserResetPassword resets user s password
+
+Reset the user's password
+*/
+func (a *Client) UserResetPassword(params *UserResetPasswordParams, authInfo runtime.ClientAuthInfoWriter) (*UserResetPasswordOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewUserResetPasswordParams()
+	}
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "userResetPassword",
+		Method:             "PUT",
+		PathPattern:        "/users/reset",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{""},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &UserResetPasswordReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*UserResetPasswordOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for userResetPassword: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
 // SetTransport changes the transport on the client
 func (a *Client) SetTransport(transport runtime.ClientTransport) {
 	a.transport = transport
