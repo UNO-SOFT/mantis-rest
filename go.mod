@@ -3,14 +3,11 @@ module github.com/UNO-SOFT/mantis-rest
 go 1.13
 
 require (
-	github.com/go-openapi/errors v0.20.3
-	github.com/go-openapi/jsonreference v0.20.2 // indirect
-	github.com/go-openapi/runtime v0.26.0
-	github.com/go-openapi/spec v0.20.9 // indirect
-	github.com/go-openapi/strfmt v0.21.7
-	github.com/go-openapi/swag v0.22.3
-	github.com/go-openapi/validate v0.22.1
-	github.com/kr/pretty v0.3.1 // indirect
-	go.mongodb.org/mongo-driver v1.11.6 // indirect
-	go.opentelemetry.io/otel v1.16.0 // indirect
+	github.com/go-openapi/errors v0.21.0
+	github.com/go-openapi/runtime v0.27.1
+	github.com/go-openapi/strfmt v0.22.1
+	github.com/go-openapi/swag v0.22.9
+	github.com/go-openapi/validate v0.23.0
+	go.opentelemetry.io/otel v1.24.0 // indirect
+	golang.org/x/sync v0.6.0 // indirect
 )

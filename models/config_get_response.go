@@ -82,6 +82,11 @@ func (m *ConfigGetResponse) contextValidateConfigs(ctx context.Context, formats 
 	for i := 0; i < len(m.Configs); i++ {
 
 		if m.Configs[i] != nil {
+
+			if swag.IsZero(m.Configs[i]) { // not required
+				return nil
+			}
+
 			if err := m.Configs[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("configs" + "." + strconv.Itoa(i))

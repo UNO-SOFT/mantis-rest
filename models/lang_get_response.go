@@ -85,6 +85,11 @@ func (m *LangGetResponse) contextValidateStrings(ctx context.Context, formats st
 	for i := 0; i < len(m.Strings); i++ {
 
 		if m.Strings[i] != nil {
+
+			if swag.IsZero(m.Strings[i]) { // not required
+				return nil
+			}
+
 			if err := m.Strings[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("strings" + "." + strconv.Itoa(i))

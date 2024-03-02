@@ -125,6 +125,11 @@ func (m *UserMeResponse) ContextValidate(ctx context.Context, formats strfmt.Reg
 func (m *UserMeResponse) contextValidateAccessLevel(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.AccessLevel != nil {
+
+		if swag.IsZero(m.AccessLevel) { // not required
+			return nil
+		}
+
 		if err := m.AccessLevel.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("access_level")
@@ -143,6 +148,11 @@ func (m *UserMeResponse) contextValidateProjects(ctx context.Context, formats st
 	for i := 0; i < len(m.Projects); i++ {
 
 		if m.Projects[i] != nil {
+
+			if swag.IsZero(m.Projects[i]) { // not required
+				return nil
+			}
+
 			if err := m.Projects[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("projects" + "." + strconv.Itoa(i))

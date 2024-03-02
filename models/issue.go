@@ -140,6 +140,11 @@ func (m *Issue) ContextValidate(ctx context.Context, formats strfmt.Registry) er
 func (m *Issue) contextValidateHandler(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Handler != nil {
+
+		if swag.IsZero(m.Handler) { // not required
+			return nil
+		}
+
 		if err := m.Handler.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("handler")
@@ -156,6 +161,11 @@ func (m *Issue) contextValidateHandler(ctx context.Context, formats strfmt.Regis
 func (m *Issue) contextValidateReporter(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Reporter != nil {
+
+		if swag.IsZero(m.Reporter) { // not required
+			return nil
+		}
+
 		if err := m.Reporter.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("reporter")

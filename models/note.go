@@ -202,6 +202,11 @@ func (m *Note) contextValidateAttachments(ctx context.Context, formats strfmt.Re
 	for i := 0; i < len(m.Attachments); i++ {
 
 		if m.Attachments[i] != nil {
+
+			if swag.IsZero(m.Attachments[i]) { // not required
+				return nil
+			}
+
 			if err := m.Attachments[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("attachments" + "." + strconv.Itoa(i))
@@ -220,6 +225,11 @@ func (m *Note) contextValidateAttachments(ctx context.Context, formats strfmt.Re
 func (m *Note) contextValidateReporter(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Reporter != nil {
+
+		if swag.IsZero(m.Reporter) { // not required
+			return nil
+		}
+
 		if err := m.Reporter.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("reporter")
@@ -236,6 +246,11 @@ func (m *Note) contextValidateReporter(ctx context.Context, formats strfmt.Regis
 func (m *Note) contextValidateTimeTracking(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.TimeTracking != nil {
+
+		if swag.IsZero(m.TimeTracking) { // not required
+			return nil
+		}
+
 		if err := m.TimeTracking.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("time_tracking")
@@ -252,6 +267,11 @@ func (m *Note) contextValidateTimeTracking(ctx context.Context, formats strfmt.R
 func (m *Note) contextValidateViewState(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.ViewState != nil {
+
+		if swag.IsZero(m.ViewState) { // not required
+			return nil
+		}
+
 		if err := m.ViewState.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("view_state")

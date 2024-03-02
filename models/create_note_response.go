@@ -102,6 +102,11 @@ func (m *CreateNoteResponse) ContextValidate(ctx context.Context, formats strfmt
 func (m *CreateNoteResponse) contextValidateIssue(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Issue != nil {
+
+		if swag.IsZero(m.Issue) { // not required
+			return nil
+		}
+
 		if err := m.Issue.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("issue")
@@ -118,6 +123,11 @@ func (m *CreateNoteResponse) contextValidateIssue(ctx context.Context, formats s
 func (m *CreateNoteResponse) contextValidateNote(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Note != nil {
+
+		if swag.IsZero(m.Note) { // not required
+			return nil
+		}
+
 		if err := m.Note.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("note")

@@ -72,6 +72,11 @@ func (m *CreateIssueResponse) ContextValidate(ctx context.Context, formats strfm
 func (m *CreateIssueResponse) contextValidateIssues(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Issues != nil {
+
+		if swag.IsZero(m.Issues) { // not required
+			return nil
+		}
+
 		if err := m.Issues.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("issues")
